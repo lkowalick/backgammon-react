@@ -23,14 +23,19 @@ export default class Point extends Component {
 
     return (
       _.range(this.props.checkerNumber).map((e) => {
-        return <circle cx="20" cy={`${(e+1)*offset}`} r="20" style={{ fill: this.props.checkerColor, stroke: 'black' }} />
+        return <circle cx="20" cy={`${(e+1)*offset}`} r="19" style={{ fill: this.props.checkerColor, stroke: 'black' }} />
       })
     );
   }
 
   render() {
     return (
-      <svg height="200" width="8%" style={{ marginTop: "10px 0" }} >
+      <svg
+        height="200"
+        width="8%"
+        style={{ marginTop: "10px 0" }}
+        onClick={()=> this.props.onClick(this.props.number)}
+      >
         <polygon points={this.points()} style={this.style()} />
         {this.checkers()}
       </svg>
