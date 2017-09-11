@@ -30,20 +30,32 @@ export default class Board extends Component {
   }
 
   render() {
-    var points = _.range(1,25).map(e => {
+    var white_points = _.range(1,13).map(e => {
       return (
         <Point number={e}
           checkerColor={this.checkerColor(e)}
           checkerNumber={this.checkerNumber(e)}
           onClick={()=> {this.handlePointClick(e)}}
-          key={e}
-        />
+          key={e} />
+      );
+    });
+
+    var black_points = _.rangeRight(13,25).map(e => {
+      return (
+        <Point number={e}
+          checkerColor={this.checkerColor(e)}
+          checkerNumber={this.checkerNumber(e)}
+          onClick={()=> {this.handlePointClick(e)}}
+          key={e} />
       );
     });
 
     return (
-      <div style={{ display: "flex", flexWrap: "wrap" }} width="480px" >
-        {points}
+      <div>
+        <div style={{ display: "flex", flexWrap: "wrap" }} width="480px" >
+          {white_points}
+          {black_points}
+        </div>
       </div>
     );
   }

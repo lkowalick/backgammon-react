@@ -1,10 +1,10 @@
 # Components
 
- App - Dice
-  |
-Board
-  |
-Point
+      App-Dice
+       |
+Home-Board-Bar
+       |
+     Point
 
 # State
 
