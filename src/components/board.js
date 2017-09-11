@@ -9,7 +9,7 @@ export default class Board extends Component {
   }
 
   checkerColor(point) {
-    if (this.state['white'][point] > 0) {
+    if (this.state.checkers[point] > 0) {
       return 'white';
     } else {
       return 'black';
@@ -17,15 +17,17 @@ export default class Board extends Component {
   }
 
   checkerNumber(point) {
-    return this.state[this.checkerColor(point)][point];
+    return Math.abs(this.state.checkers[point]);
   }
 
   handlePointClick(point) {
-    var prevArrangement = this.state[this.checkerColor(point)].slice();
-    prevArrangement[point] -= 1;
-    prevArrangement[point + 1] += 1;
+    var newArrangement = this.state.checkers.slice();
+    var sign = Math.sign(prevArrangement[point]);
+    var sign = Math.sign(prevArrangement[point]);
+    newArrangement[point] -= sign*1;
+    newArrangement[point + 1] += 1;
     this.setState((prevState, props) => {
-      return { ...prevState, [this.checkerColor(point)]: prevArrangement };
+      return { ...prevState, [this.checkerColor(point)]: newArrangement };
     });
   }
 
