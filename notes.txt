@@ -1,0 +1,15 @@
+# Components
+
+ App - Dice
+  |
+Board
+  |
+Point
+
+# State
+
+We need:
+
+- Piece Locations
+- Current Turn
+- Moves Available
