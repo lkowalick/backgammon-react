@@ -11,8 +11,10 @@ export default class Board extends Component {
   checkerColor(point) {
     if (this.state['white'][point] > 0) {
       return 'white';
-    } else {
+    } else if (this.state['black'][point] > 0) {
       return 'black';
+    } else {
+      return;
     }
   }
 
@@ -20,7 +22,10 @@ export default class Board extends Component {
     return this.state[this.checkerColor(point)][point];
   }
 
-  handlePointClick(point) {
+  initiateMoveFromPoint(point) {
+    if (!this.checkerColor(point)) {
+      return;
+    }
     var prevArrangement = this.state[this.checkerColor(point)].slice();
     prevArrangement[point] -= 1;
     prevArrangement[point + 1] += 1;
@@ -45,14 +50,14 @@ export default class Board extends Component {
         <Point number={e}
           checkerColor={this.checkerColor(e)}
           checkerNumber={this.checkerNumber(e)}
-          onClick={()=> {this.handlePointClick(e)}}
+          onClick={()=> {this.initiateMoveFromPoint(e)}}
           key={e} />
       );
     });
 
     return (
       <div>
-        <div style={{ display: "flex", flexWrap: "wrap" }} width="480px" >
+        <div style={{ display: "flex", flexWrap: "wrap", width: "480px" }} >
           {white_points}
           {black_points}
         </div>
