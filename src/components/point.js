@@ -17,17 +17,22 @@ export default class Point extends Component {
     }
   }
 
-  checkers() {
+  renderCheckers() {
     var total = this.props.checkerNumber;
     if (total < 1) { return []; }
 
     var offset = 200/(total+1);
-    console.log(`Checkers with total ${total}`);
 
     return (
       _.range(this.props.checkerNumber).map((e) => {
-        console.log(`Checkers for point: ${e}`);
-        return <circle cx="20" cy={`${(e+1)*offset}`} r="19" style={{ fill: this.props.checkerColor, stroke: 'black' }} key={[this.props.number,e]} />
+        return (
+          <circle
+            cx="20"
+            cy={`${(e+1)*offset}`}
+            r="19"
+            style={{ fill: this.props.checkerColor, stroke: 'black' }}
+            key={[this.props.number,e]} />
+        )
       })
     );
   }
@@ -41,7 +46,7 @@ export default class Point extends Component {
         onClick={()=> this.props.onClick(this.props.number)}
       >
         <polygon points={this.points()} style={this.style()} />
-        {this.checkers()}
+        {this.renderCheckers()}
       </svg>
     );
   }

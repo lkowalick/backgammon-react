@@ -18,7 +18,14 @@ export default class Board extends Component {
     }
   }
 
+  allowedMoves(point) {
+
+  }
+
   checkerNumber(point) {
+    if (!this.checkerColor(point)) {
+      return 0;
+    }
     return this.state[this.checkerColor(point)][point];
   }
 
@@ -34,18 +41,8 @@ export default class Board extends Component {
     });
   }
 
-  render() {
-    var white_points = _.range(1,13).map(e => {
-      return (
-        <Point number={e}
-          checkerColor={this.checkerColor(e)}
-          checkerNumber={this.checkerNumber(e)}
-          onClick={()=> {this.handlePointClick(e)}}
-          key={e} />
-      );
-    });
-
-    var black_points = _.rangeRight(13,25).map(e => {
+  renderWhitePoints(half) {
+    return _.range(1 + half*6,7 + half*6).map(e => {
       return (
         <Point number={e}
           checkerColor={this.checkerColor(e)}
@@ -54,12 +51,30 @@ export default class Board extends Component {
           key={e} />
       );
     });
+  }
 
+  renderBlackPoints(half) {
+    return _.rangeRight(13+half*6,19+half*6).map(e => {
+      return (
+        <Point number={e}
+          checkerColor={this.checkerColor(e)}
+          checkerNumber={this.checkerNumber(e)}
+          onClick={()=> {this.initiateMoveFromPoint(e)}}
+          key={e} />
+      );
+    });
+  }
+
+  render() {
     return (
       <div>
-        <div style={{ display: "flex", flexWrap: "wrap", width: "480px" }} >
-          {white_points}
-          {black_points}
+        <div style={{ display: "inline-block", width: "500px" }} >
+          {this.renderWhitePoints(0)}
+          {this.renderWhitePoints(1)}
+        </div>
+        <div style={{ display: "inline-block", width: "500px" }} >
+          {this.renderBlackPoints(1)}
+          {this.renderBlackPoints(0)}
         </div>
       </div>
     );
